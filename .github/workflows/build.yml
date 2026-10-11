@@ -17,6 +17,7 @@ on:
 
 jobs:
   Build-Windows:
+    if: github.repository == 'ocornut/imgui'
     runs-on: windows-2025
     name: Build - Windows
 
@@ -28,7 +29,7 @@ jobs:
       VS_PATH: C:\Program Files\Microsoft Visual Studio\18\Enterprise
       MSBUILD_PATH: C:\Program Files\Microsoft Visual Studio\18\Enterprise\MSBuild\Current\Bin\
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           path: ${{ github.workspace }}/imgui
 
@@ -269,6 +270,7 @@ jobs:
         run: '"%MSBUILD_PATH%\MSBuild.exe" examples/example_win32_directx12/example_win32_directx12.vcxproj /p:Platform=x64 /p:Configuration=Release'
 
   Build-Linux:
+    if: github.repository == 'ocornut/imgui'
     runs-on: ubuntu-latest
     name: Build - Linux
 
@@ -277,7 +279,7 @@ jobs:
         working-directory: ${{ github.workspace }}/imgui
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       with:
         path: ${{ github.workspace }}/imgui
 
@@ -509,6 +511,7 @@ jobs:
       run: g++ -c -I. -std=c++11 -DIMGUI_IMPL_VULKAN_NO_PROTOTYPES=1 backends/imgui_impl_vulkan.cpp
 
   Build-MacOS:
+    if: github.repository == 'ocornut/imgui'
     runs-on: macos-26
     name: Build - MacOS
 
@@ -517,7 +520,7 @@ jobs:
         working-directory: ${{ github.workspace }}/imgui
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       with:
         path: ${{ github.workspace }}/imgui
 
@@ -602,11 +605,12 @@ jobs:
       if: github.event_name == 'workflow_run'
 
   Build-iOS:
+    if: github.repository == 'ocornut/imgui'
     runs-on: macos-14
     name: Build - iOS
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
     - name: Build example_apple_metal
       run: |
@@ -614,11 +618,12 @@ jobs:
         xcodebuild -project examples/example_apple_metal/example_apple_metal.xcodeproj -target example_apple_metal_ios CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO CODE_SIGNING_ALLOWED=NO
 
   Build-Emscripten:
+    if: github.repository == 'ocornut/imgui'
     runs-on: ubuntu-latest
     name: Build - Emscripten
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 
     - name: Install Dependencies
       run: |
@@ -657,6 +662,7 @@ jobs:
         cmake --build build
 
   Build-Android:
+    if: github.repository == 'ocornut/imgui'
     runs-on: ubuntu-latest
     name: Build - Android
 
@@ -666,13 +672,14 @@ jobs:
       with:
         gradle-version: '9.4.1'
 
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
     - name: Build example_android_opengl3
       run: |
         cd examples/example_android_opengl3/android
         gradle assembleDebug --stacktrace
 
   Test-Windows:
+    if: github.repository == 'ocornut/imgui'
     runs-on: windows-2025
     name: Test - Windows
 
@@ -684,11 +691,11 @@ jobs:
       MSBUILD_PATH: C:\Program Files\Microsoft Visual Studio\18\Enterprise\MSBuild\Current\Bin\
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           path: ${{ github.workspace }}/imgui
 
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         continue-on-error: true
         with:
           fetch-depth: 1
@@ -731,6 +738,7 @@ jobs:
         run: Release/imgui_test_suite.exe -nogui -nopause -v2 -ve4 -viewport-mock viewport
 
   Test-Linux:
+    if: github.repository == 'ocornut/imgui'
     runs-on: ubuntu-latest
     name: Test - Linux
 
@@ -739,11 +747,11 @@ jobs:
         working-directory: ${{ github.workspace }}/imgui
 
     steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       with:
         path: ${{ github.workspace }}/imgui
 
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
       with:
         fetch-depth: 1
         repository: ocornut/imgui_test_engine
@@ -777,11 +785,11 @@ jobs:
 #        working-directory: ${{ github.workspace }}/imgui
 #
 #    steps:
-#    - uses: actions/checkout@v6
+#    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 #      with:
 #        path: ${{ github.workspace }}/imgui
 #
-#    - uses: actions/checkout@v6
+#    - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
 #      with:
 #        fetch-depth: 1
 #        repository: ocornut/imgui_test_engine
