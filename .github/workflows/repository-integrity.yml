@@ -36,6 +36,6 @@ jobs:
       - name: Run project acceptance checks
         shell: bash
         run: |
-          g++ -std=c++11 -DIMGUI_DISABLE_OBSOLETE_FUNCTIONS -c imgui.cpp imgui_draw.cpp imgui_tables.cpp imgui_widgets.cpp
+          g++ -std=c++11 -c imgui.cpp imgui_draw.cpp imgui_tables.cpp imgui_widgets.cpp
           g++ -std=c++11 -I. .github/quality/imgui_smoke.cpp imgui.o imgui_draw.o imgui_tables.o imgui_widgets.o -o /tmp/imgui-smoke
           /tmp/imgui-smoke
